@@ -151,3 +151,172 @@ body {
     .mission-vision-container { grid-template-columns: 1fr; }
     .main-footer .container { grid-template-columns: 1fr; text-align: center; }
 }
+
+/* ======================================= */
+/* ESTILOS DA PÁGINA HUB DE SERVIÇOS       */
+/* ======================================= */
+
+.services-hub-section {
+    padding: 80px 0;
+}
+
+.services-hub-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+.service-hub-card {
+    display: block;
+    text-decoration: none;
+    color: var(--text-color);
+    border: 1px solid #e0e0e0;
+    padding: 40px 30px;
+    text-align: center;
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.service-hub-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    border-color: var(--primary-blue);
+}
+
+.service-hub-icon {
+    font-size: 3rem;
+    color: var(--primary-blue);
+    margin-bottom: 1.5rem;
+}
+
+.service-hub-card h3 {
+    font-family: var(--heading-font);
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.service-hub-card p {
+    font-size: 1rem;
+    color: #6c757d;
+}
+
+/* ======================================= */
+/* ESTILOS DA PÁGINA DE SERVIÇOS           */
+/* ======================================= */
+
+/* Service Hero Section - AGORA COM EFEITO ANIMADO */
+.service-hero-section {
+    color: #fff;
+    padding: 60px 0;
+    text-align: center;
+    /* Define o gradiente com as cores do seu site */
+    background: linear-gradient(135deg, var(--dark-blue), var(--primary-blue), #006dd1);
+    /* Aumenta o tamanho do fundo para a animação ter espaço para se mover */
+    background-size: 400% 400%;
+    /* Aplica a animação que vamos criar abaixo */
+    animation: gradientAnimation 15s ease infinite;
+}
+
+/* Cria a animação do gradiente */
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.breadcrumbs {
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+.breadcrumbs a {
+    color: #fff;
+    text-decoration: none;
+    opacity: 0.8;
+}
+.breadcrumbs a:hover {
+    opacity: 1;
+    text-decoration: underline;
+}
+.service-hero-section h1 {
+    font-family: var(--heading-font);
+    font-size: 3rem;
+}
+
+/* Service Intro Section */
+.service-intro-section {
+    padding: 80px 0;
+}
+.service-intro-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+}
+.service-intro-text h2 {
+    font-family: var(--heading-font);
+    font-size: 2.5rem;
+    color: var(--dark-blue);
+    margin-bottom: 1.5rem;
+}
+.service-intro-image img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+/* Service Features Section */
+.service-features-section {
+    padding: 80px 0;
+    background-color: var(--light-gray);
+}
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+.feature-card {
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+}
+.feature-card i {
+    font-size: 1.5rem;
+    color: var(--primary-blue);
+    margin-bottom: 1rem;
+}
+.feature-card h3 {
+    font-family: var(--heading-font);
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Service Process Section */
+.service-process-section {
+    padding: 80px 0;
+}
+.process-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    text-align: center;
+}
+.step-number {
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    border-radius: 50%;
+    background-color: var(--primary-blue);
+    color: #fff;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0 auto 1.5rem auto;
+}
+.step h3 {
+    font-family: var(--heading-font);
+    margin-bottom: 0.5rem;
+}
