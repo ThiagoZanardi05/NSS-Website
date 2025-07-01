@@ -1,0 +1,153 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Poppins:wght@600;700&display=swap');
+
+:root {
+    --primary-blue: #00529B;
+    --dark-blue: #0d2c4a;
+    --light-gray: #f4f6f8;
+    --text-color: #333;
+    --heading-font: 'Poppins', sans-serif;
+    --body-font: 'Roboto', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--body-font);
+    color: var(--text-color);
+    background: #fff;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header */
+.main-header { background: #fff; padding: 15px 0; border-bottom: 1px solid #e0e0e0; position: sticky; top: 0; z-index: 1000; }
+.main-header .container { display: flex; justify-content: space-between; align-items: center; }
+.logo { font-family: var(--heading-font); font-size: 2rem; color: var(--dark-blue); text-decoration: none; }
+.main-nav { display: flex; gap: 30px; }
+.main-nav a { text-decoration: none; color: var(--text-color); font-weight: 700; font-size: 1rem; transition: color 0.3s; }
+.main-nav a:hover { color: var(--primary-blue); }
+.btn { text-decoration: none; padding: 12px 25px; border-radius: 5px; font-weight: 700; transition: all 0.3s; }
+.btn-contact { border: 2px solid var(--primary-blue); color: var(--primary-blue); }
+.btn-contact:hover { background: var(--primary-blue); color: #fff; }
+.btn-primary { background: var(--primary-blue); color: #fff; }
+.btn-primary:hover { background: var(--dark-blue); }
+.mobile-nav-toggle { display: none; }
+
+/* Hero Section */
+.hero-section { background: linear-gradient(rgba(13, 44, 74, 0.7), rgba(13, 44, 74, 0.7)), url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop') no-repeat center center/cover; height: 60vh; display: flex; align-items: center; justify-content: center; text-align: center; color: #fff; }
+.hero-content h1 { font-family: var(--heading-font); font-size: 3.5rem; margin-bottom: 1rem; }
+.hero-content p { font-size: 1.2rem; max-width: 700px; margin: 0 auto 2rem auto; }
+
+/* Trusted By Section */
+.trusted-by { background: var(--light-gray); padding: 20px 0; text-align: center; }
+.trusted-by p { font-weight: 700; margin-bottom: 15px; }
+.logos { display: flex; justify-content: center; align-items: center; gap: 40px; filter: grayscale(100%); opacity: 0.7; }
+.logos span { font-size: 1.2rem; font-weight: 600; }
+
+/* General Section Styling */
+.section-header { text-align: center; margin-bottom: 50px; }
+.section-header h2 { font-family: var(--heading-font); font-size: 2.5rem; color: var(--dark-blue); margin-bottom: 10px; }
+.section-header p { max-width: 600px; margin: 0 auto; }
+
+/* Services Section */
+.services-section { padding: 80px 0; background: #fff; }
+.services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+.service-card {
+    background: var(--light-gray);
+    padding: 30px;
+    text-align: center;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+.service-card i { font-size: 2.5rem; color: var(--primary-blue); margin-bottom: 15px; }
+.service-card h3 { font-family: var(--heading-font); margin-bottom: 10px; }
+
+/* Why NSS Section */
+.why-nss-section { padding: 80px 0; background-color: var(--light-gray); }
+.why-nss-container { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+.why-nss-image img { width: 100%; border-radius: 8px; }
+.why-nss-content .section-header { text-align: left; margin-bottom: 20px; }
+.why-nss-content p { margin-bottom: 20px; }
+.why-nss-list { list-style: none; }
+.why-nss-list li { margin-bottom: 15px; font-weight: 700; display: flex; align-items: center; }
+.why-nss-list i { color: var(--primary-blue); margin-right: 10px; font-size: 1.2rem; }
+
+/* Mission & Vision Section */
+.mission-vision-section { padding: 80px 0; }
+.mission-vision-container { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+.mission-card, .vision-card { padding: 30px; border: 1px solid #e0e0e0; border-radius: 8px; border-left: 5px solid var(--primary-blue); }
+.mission-card h3, .vision-card h3 { font-family: var(--heading-font); margin-bottom: 15px; color: var(--dark-blue); }
+
+/* Final CTA */
+.final-cta {
+    background: var(--dark-blue);
+    color: #fff;
+    padding: 60px 20px;
+}
+.final-cta .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+.final-cta h2 {
+    font-family: var(--heading-font);
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+.final-cta p {
+    margin-bottom: 2rem;
+    max-width: 600px;
+}
+
+/* Footer */
+.main-footer { background: #041d36; color: #fff; padding-top: 50px; }
+.main-footer .container { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; }
+.main-footer h3 { font-family: var(--heading-font); margin-bottom: 15px; }
+.footer-links ul { list-style: none; }
+.footer-links a { color: #fff; text-decoration: none; margin-bottom: 10px; display: block; transition: color 0.3s; }
+.footer-links a:hover { color: var(--primary-blue); }
+.footer-bottom { text-align: center; padding: 20px 0; margin-top: 40px; border-top: 1px solid #2a4a6c; }
+
+/* ESTILOS PARA ANIMAÇÃO DE SCROLL (FADE-IN) */
+.animate-on-scroll {
+    opacity: 0;
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in-left {
+    transform: translateX(-50px);
+}
+
+.animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .main-nav, .btn-contact { display: none; }
+    .mobile-nav-toggle { display: block; background: none; border: none; color: var(--dark-blue); font-size: 1.5rem; cursor: pointer; }
+    .hero-content h1 { font-size: 2.5rem; }
+    .logos { flex-wrap: wrap; }
+    .why-nss-container { grid-template-columns: 1fr; }
+    .why-nss-content .section-header { text-align: center; }
+    .mission-vision-container { grid-template-columns: 1fr; }
+    .main-footer .container { grid-template-columns: 1fr; text-align: center; }
+}
