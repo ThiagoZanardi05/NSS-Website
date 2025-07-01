@@ -140,18 +140,6 @@ body {
     transform: translateX(0);
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .main-nav, .btn-contact { display: none; }
-    .mobile-nav-toggle { display: block; background: none; border: none; color: var(--dark-blue); font-size: 1.5rem; cursor: pointer; }
-    .hero-content h1 { font-size: 2.5rem; }
-    .logos { flex-wrap: wrap; }
-    .why-nss-container { grid-template-columns: 1fr; }
-    .why-nss-content .section-header { text-align: center; }
-    .mission-vision-container { grid-template-columns: 1fr; }
-    .main-footer .container { grid-template-columns: 1fr; text-align: center; }
-}
-
 /* ======================================= */
 /* ESTILOS DA PÁGINA HUB DE SERVIÇOS       */
 /* ======================================= */
@@ -201,33 +189,30 @@ body {
 }
 
 /* ======================================= */
-/* ESTILOS DA PÁGINA DE SERVIÇOS           */
+/* ESTILOS DA PÁGINA DE SERVIÇOS (DETALHE) */
 /* ======================================= */
 
-/* Service Hero Section - AGORA COM EFEITO ANIMADO */
 .service-hero-section {
+    position: relative;
+    background-color: var(--dark-blue);
     color: #fff;
     padding: 60px 0;
     text-align: center;
-    /* Define o gradiente com as cores do seu site */
-    background: linear-gradient(135deg, var(--dark-blue), var(--primary-blue), #006dd1);
-    /* Aumenta o tamanho do fundo para a animação ter espaço para se mover */
-    background-size: 400% 400%;
-    /* Aplica a animação que vamos criar abaixo */
-    animation: gradientAnimation 15s ease infinite;
+    overflow: hidden;
 }
 
-/* Cria a animação do gradiente */
-@keyframes gradientAnimation {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
+#particle-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.service-hero-section .container {
+    position: relative;
+    z-index: 2;
 }
 
 .breadcrumbs {
@@ -248,75 +233,66 @@ body {
     font-size: 3rem;
 }
 
-/* Service Intro Section */
-.service-intro-section {
-    padding: 80px 0;
-}
-.service-intro-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 50px;
-    align-items: center;
-}
-.service-intro-text h2 {
-    font-family: var(--heading-font);
-    font-size: 2.5rem;
-    color: var(--dark-blue);
-    margin-bottom: 1.5rem;
-}
-.service-intro-image img {
-    width: 100%;
-    border-radius: 8px;
-}
+.service-intro-section { padding: 80px 0; }
+.service-intro-container { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+.service-intro-text h2 { font-family: var(--heading-font); font-size: 2.5rem; color: var(--dark-blue); margin-bottom: 1.5rem; }
+.service-intro-image img { width: 100%; border-radius: 8px; }
 
-/* Service Features Section */
-.service-features-section {
-    padding: 80px 0;
-    background-color: var(--light-gray);
-}
-.features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-}
-.feature-card {
-    background: #fff;
-    padding: 30px;
-    border-radius: 8px;
-}
-.feature-card i {
-    font-size: 1.5rem;
-    color: var(--primary-blue);
-    margin-bottom: 1rem;
-}
-.feature-card h3 {
-    font-family: var(--heading-font);
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
-}
+.service-features-section { padding: 80px 0; background-color: var(--light-gray); }
+.features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+.feature-card { background: #fff; padding: 30px; border-radius: 8px; }
+.feature-card i { font-size: 1.5rem; color: var(--primary-blue); margin-bottom: 1rem; }
+.feature-card h3 { font-family: var(--heading-font); font-size: 1.2rem; margin-bottom: 0.5rem; }
 
-/* Service Process Section */
-.service-process-section {
-    padding: 80px 0;
-}
-.process-steps {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-    text-align: center;
-}
-.step-number {
-    width: 60px;
-    height: 60px;
-    line-height: 60px;
-    border-radius: 50%;
-    background-color: var(--primary-blue);
-    color: #fff;
-    font-size: 1.8rem;
-    font-weight: 700;
-    margin: 0 auto 1.5rem auto;
-}
-.step h3 {
-    font-family: var(--heading-font);
-    margin-bottom: 0.5rem;
+.service-process-section { padding: 80px 0; }
+.process-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; text-align: center; }
+.step-number { width: 60px; height: 60px; line-height: 60px; border-radius: 50%; background-color: var(--primary-blue); color: #fff; font-size: 1.8rem; font-weight: 700; margin: 0 auto 1.5rem auto; }
+.step h3 { font-family: var(--heading-font); margin-bottom: 0.5rem; }
+
+/* Responsive */
+@media (max-width: 768px) {
+    /* Esconde o menu de desktop e o botão de contato, mostra o ícone do menu mobile */
+    .main-nav { display: none; }
+    .btn-contact { display: none; }
+    .mobile-nav-toggle { display: block; background: none; border: none; color: var(--dark-blue); font-size: 1.5rem; cursor: pointer; z-index: 1001; }
+
+    /* Estilos para o menu quando estiver ativo (aberto) */
+    .main-nav.nav-active {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        position: absolute;
+        top: 69px; /* Altura do header */
+        left: 0;
+        width: 100%;
+        background-color: #fff;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        padding: 10px 0;
+    }
+
+    .main-nav.nav-active a {
+        width: 100%;
+        text-align: center;
+        padding: 15px 0;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .main-nav.nav-active a:last-child {
+        border-bottom: none;
+    }
+
+    /* Outros ajustes responsivos */
+    .hero-content h1 { font-size: 2.5rem; }
+    .logos { flex-wrap: wrap; }
+    .why-nss-container { grid-template-columns: 1fr; }
+    .why-nss-content .section-header { text-align: center; }
+    .mission-vision-container { grid-template-columns: 1fr; }
+    .main-footer .container { grid-template-columns: 1fr; text-align: center; }
+
+    .service-hero-section h1 { font-size: 2.2rem; }
+    .service-intro-container { grid-template-columns: 1fr; gap: 30px; }
+    .service-intro-text { text-align: center; }
+    .service-intro-text h2 { text-align: center; }
+    .services-hub-grid { grid-template-columns: 1fr; }
 }
