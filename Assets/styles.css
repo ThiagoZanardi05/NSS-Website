@@ -54,26 +54,23 @@ body {
 /* ======================================= */
 /* ESTILOS PARA LOGOS DE PARCEIROS         */
 /* ======================================= */
-
 .logos {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 50px; /* Espaçamento entre os logos */
-    flex-wrap: wrap; /* Permite que os logos quebrem a linha em telas menores */
+    gap: 50px;
+    flex-wrap: wrap;
 }
-
 .logos img {
-    max-height: 50px; /* Define uma altura máxima para todos os logos */
-    width: auto;      /* A largura se ajusta automaticamente */
-    filter: grayscale(100%); /* Deixa os logos em preto e branco */
-    opacity: 0.7;           /* Deixa um pouco transparente */
+    max-height: 50px;
+    width: auto;
+    filter: grayscale(100%);
+    opacity: 0.7;
     transition: all 0.3s ease;
 }
-
 .logos img:hover {
-    filter: grayscale(0%); /* Remove o filtro ao passar o mouse */
-    opacity: 1;            /* Deixa o logo com cor total */
+    filter: grayscale(0%);
+    opacity: 1;
 }
 
 /* General Section Styling */
@@ -193,117 +190,122 @@ body {
 /* ======================================= */
 /* ESTILOS DA PÁGINA DE CONTATO            */
 /* ======================================= */
-
-.contact-main-section {
-    padding: 80px 0;
-}
-
-.contact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-}
-
-.contact-info-map h2 {
-    font-family: var(--heading-font);
-    font-size: 2.5rem;
-    color: var(--dark-blue);
-    margin-bottom: 1.5rem;
-}
-
-.contact-details-list {
-    list-style: none;
-    margin: 30px 0;
-}
-
-.contact-details-list li {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-    font-size: 1.1rem;
-}
-
-.contact-details-list i {
-    color: var(--primary-blue);
-    font-size: 1.5rem;
-    width: 30px;
-    margin-right: 20px;
-}
-
-.contact-details-list a {
-    color: var(--primary-blue);
-    text-decoration: none;
-    font-weight: 700;
-}
-
-.contact-details-list a:hover {
-    text-decoration: underline;
-}
-
-.map-container {
-    border-radius: 8px;
-    overflow: hidden;
-    border: 1px solid #e0e0e0;
-}
-
-.contact-form-container {
-    background-color: var(--light-gray);
-    padding: 40px;
-    border-radius: 8px;
-}
-
-.contact-form .form-group {
-    margin-bottom: 20px;
-}
-
-.contact-form label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 700;
-}
-
+.contact-main-section { padding: 80px 0; }
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+.contact-info-map h2 { font-family: var(--heading-font); font-size: 2.5rem; color: var(--dark-blue); margin-bottom: 1.5rem; }
+.contact-details-list { list-style: none; margin: 30px 0; }
+.contact-details-list li { display: flex; align-items: center; margin-bottom: 20px; font-size: 1.1rem; }
+.contact-details-list i { color: var(--primary-blue); font-size: 1.5rem; width: 30px; margin-right: 20px; }
+.contact-details-list a { color: var(--primary-blue); text-decoration: none; font-weight: 700; }
+.contact-details-list a:hover { text-decoration: underline; }
+.map-container { border-radius: 8px; overflow: hidden; border: 1px solid #e0e0e0; }
+.contact-form-container { background-color: var(--light-gray); padding: 40px; border-radius: 8px; }
+.contact-form .form-group { margin-bottom: 20px; }
+.contact-form label { display: block; margin-bottom: 8px; font-weight: 700; }
 .contact-form input,
 .contact-form textarea,
-.contact-form select {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-family: var(--body-font);
-    font-size: 1rem;
-}
-
+.contact-form select { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 5px; font-family: var(--body-font); font-size: 1rem; }
 .contact-form input:focus,
 .contact-form textarea:focus,
-.contact-form select:focus {
-    outline: none;
-    border-color: var(--primary-blue);
-    box-shadow: 0 0 5px rgba(0, 82, 155, 0.3);
-}
+.contact-form select:focus { outline: none; border-color: var(--primary-blue); box-shadow: 0 0 5px rgba(0, 82, 155, 0.3); }
+.form-group-checkbox { display: flex; align-items: center; gap: 10px; margin: 25px 0; }
+.form-group-checkbox input { width: auto; }
+.form-group-checkbox label { margin-bottom: 0; font-weight: normal; }
+.contact-form button { width: 100%; padding: 15px; font-size: 1.1rem; }
 
-.form-group-checkbox {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin: 25px 0;
-}
+/* ======================================= */
+/* ESTILOS DA PÁGINA DE CARREIRAS          */
+/* ======================================= */
+.careers-main-section { padding: 80px 0; }
+.careers-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 60px; }
+.benefits-container h2,
+.open-positions-container h2 { font-family: var(--heading-font); font-size: 2.5rem; color: var(--dark-blue); margin-bottom: 2rem; }
+.benefits-list { list-style: none; }
+.benefits-list li { font-size: 1.2rem; font-weight: 700; margin-bottom: 20px; display: flex; align-items: center; }
+.benefits-list i { color: var(--primary-blue); font-size: 1.5rem; margin-right: 15px; }
+.job-card { background-color: var(--light-gray); border: 1px solid #e0e0e0; border-radius: 8px; padding: 25px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; transition: all 0.3s ease; }
+.job-card:hover { border-color: var(--primary-blue); box-shadow: 0 5px 15px rgba(0,0,0,0.07); transform: translateY(-5px); }
+.job-card h3 { font-family: var(--heading-font); font-size: 1.5rem; margin-bottom: 5px; }
+.job-location { color: #6c757d; font-weight: 700; }
+.job-location i { margin-right: 5px; }
 
-.form-group-checkbox input {
-    width: auto;
-}
 
-.form-group-checkbox label {
-    margin-bottom: 0;
-    font-weight: normal;
-}
+/* ======================================= */
+/* ESTILOS DO MODAL DE CANDIDATURA         */
+/* ======================================= */
 
-.contact-form button {
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    padding: 15px;
-    font-size: 1.1rem;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
-/* Responsive */
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+    transform: translateY(-50px);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.active .modal-content {
+    transform: translateY(0);
+}
+
+.modal-content h2 {
+    font-family: var(--heading-font);
+    color: var(--dark-blue);
+    margin-bottom: 10px;
+}
+
+.modal-content p {
+    margin-bottom: 30px;
+}
+
+.close-modal-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 2.5rem;
+    color: #aaa;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.close-modal-btn:hover {
+    color: #333;
+}
+
+/* Estilo para o campo de upload de arquivo */
+#modal-cv {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* ======================================= */
+/* RESPONSIVIDADE - APLICA-SE A TODAS AS PÁGINAS */
+/* ======================================= */
 @media (max-width: 768px) {
     /* Base */
     .main-nav { display: none; }
@@ -339,5 +341,17 @@ body {
     .contact-grid {
         grid-template-columns: 1fr;
     }
-    
+
+    /* Página de Carreiras */
+    .careers-grid {
+        grid-template-columns: 1fr;
+    }
+    .benefits-container {
+        margin-bottom: 40px;
+    }
+    .job-card {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
 }

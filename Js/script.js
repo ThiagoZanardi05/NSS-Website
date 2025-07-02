@@ -243,3 +243,39 @@ document.addEventListener('DOMContentLoaded', () => {
         animatedElements.forEach(element => { observer.observe(element); });
     }
 });
+
+// --- LÓGICA DO MODAL DE CANDIDATURA ---
+    const applyButtons = document.querySelectorAll('.apply-btn');
+    const modalOverlay = document.getElementById('application-modal');
+    const closeModalBtn = document.querySelector('.close-modal-btn');
+    const jobTitleModal = document.getElementById('job-title-modal');
+    const jobTitleHiddenInput = document.getElementById('job-title-hidden');
+
+    if (modalOverlay) {
+        applyButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Pega o título da vaga do elemento h3 irmão
+                const jobCard = button.closest('.job-card');
+                const jobTitle = jobCard.querySelector('h3').textContent;
+
+                // Atualiza o título no modal e no campo escondido do formulário
+                jobTitleModal.textContent = jobTitle;
+                jobTitleHiddenInput.value = jobTitle;
+                
+                // Mostra o modal
+                modalOverlay.classList.add('active');
+            });
+        });
+
+        const closeModal = () => {
+            modalOverlay.classList.remove('active');
+        }
+
+        closeModalBtn.addEventListener('click', closeModal);
+        modalOverlay.addEventListener('click', (event) => {
+            // Fecha o modal apenas se o clique for no fundo cinza
+            if (event.target === modalOverlay) {
+                closeModal();
+            }
+        });
+    }

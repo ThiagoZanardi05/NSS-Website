@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Careers | NSS Solutions</title>
+    <link rel="stylesheet" href="Assets/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container">
+            <a href="index.html" class="logo">NSS</a>
+            <nav class="main-nav">
+                <a href="index.html">Home</a>
+                <a href="about-us.html">About Us</a>
+                <a href="services.html">Services</a>
+                <a href="#">Projects</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            <a href="#" class="btn btn-contact">Request a Quote</a>
+            <button class="mobile-nav-toggle" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <section class="service-hero-section">
+            <div class="container">
+                <h1>Your Career, Engineered.</h1>
+                <p>Looking to grow in a fast-moving, safety-focused environment? Join the NSS team.</p>
+            </div>
+        </section>
+
+        <section class="careers-main-section">
+            <div class="container careers-grid">
+                
+                <div class="benefits-container">
+                    <h2>Why Join NSS?</h2>
+                    <ul class="benefits-list">
+                        <li><i class="fas fa-check-circle"></i> Internal training</li>
+                        <li><i class="fas fa-chart-line"></i> Growth opportunities</li>
+                        <li><i class="fas fa-pound-sign"></i> Competitive pay</li>
+                        <li><i class="fas fa-users"></i> Supportive work culture</li>
+                    </ul>
+                </div>
+
+                <div class="open-positions-container">
+                    <h2>Open Positions</h2>
+
+                    <div class="job-card">
+                        <div class="job-details">
+                            <h3>Network Engineer</h3>
+                            <p class="job-location"><i class="fas fa-map-marker-alt"></i> Manchester, UK</p>
+                        </div>
+                        <div class="job-apply">
+                            <button class="btn btn-primary apply-btn">Apply</button>
+                        </div>
+                    </div>
+
+                    <div class="job-card">
+                        <div class="job-details">
+                            <h3>Project Coordinator</h3>
+                            <p class="job-location"><i class="fas fa-map-marker-alt"></i> Manchester, UK</p>
+                        </div>
+                        <div class="job-apply">
+                            <button class="btn btn-primary apply-btn">Apply</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="application-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="close-modal-btn">&times;</button>
+            <h2>Apply for <span id="job-title-modal">Job Title</span></h2>
+            <p>Please fill out the form below to submit your application.</p>
+            
+            <form action="https://api.web3forms.com/submit" method="POST" enctype="multipart/form-data" class="contact-form">
+                
+                <input type="hidden" name="access_key" value="SUA_CHAVE_DE_ACESSO_AQUI">
+                
+                <input type="hidden" id="job-title-hidden" name="job-title" value="">
+
+                <div class="form-group">
+                    <label for="modal-full-name">Full Name</label>
+                    <input type="text" id="modal-full-name" name="full-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="modal-email">Email</label>
+                    <input type="email" id="modal-email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="modal-cv">Upload CV (PDF, DOC, DOCX)</label>
+                    <input type="file" id="modal-cv" name="cv-upload" accept=".pdf,.doc,.docx" required>
+                </div>
+                <div class="form-group-checkbox">
+                    <input type="checkbox" id="modal-gdpr" name="gdpr" required>
+                    <label for="modal-gdpr">I consent to NSS storing my submitted data.</label>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit Application</button>
+            </form>
+        </div>
+    </div>
+
+
+    <footer class="main-footer">
+          <div class="container">
+            <div class="footer-about">
+                <h3>NSS</h3>
+                <p>Delivering dependable, high-performance network solutions that support our clients' growth, safety, and connectivity.</p>
+            </div>
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="about-us.html">About Us</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="careers.html">Projects</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <p>Manchester, UK</p>
+                <p>Email: contact@nss.com</p>
+                <p>Phone: [Company Number]</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 NSS Solutions. All Rights Reserved.</p>
+        </div>
+        </footer>
+
+    <script src="Js/script.js"></script>
+</body>
+</html>
