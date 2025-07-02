@@ -149,63 +149,84 @@ document.addEventListener('DOMContentLoaded', () => {
         setCanvasSize(); initBeams(); animateBeams(); window.addEventListener('resize', () => { setCanvasSize(); initBeams(); });
     }
 
-    // --- EFEITO 6: ONDAS WI-FI (VERSÃO CORRIGIDA E MAIOR) ---
+    // --- EFEITO 6: ONDAS WI-FI (PARA wireless-solutions.html) ---
     const wifiCanvas = document.getElementById('wifi-canvas');
     if (wifiCanvas) {
         const ctx = wifiCanvas.getContext('2d');
         const setCanvasSize = () => { wifiCanvas.width = wifiCanvas.offsetWidth; wifiCanvas.height = wifiCanvas.offsetHeight; };
-        
         let waves = [];
         class Wave {
-            constructor(speed, opacity, thickness) {
-                this.x = wifiCanvas.width / 2;
-                this.y = wifiCanvas.height / 2;
-                this.radius = 0;
-                this.opacity = opacity;
-                this.speed = speed;
-                this.thickness = thickness;
+            constructor(speed, opacity, thickness) { this.x = wifiCanvas.width / 2; this.y = wifiCanvas.height / 2; this.radius = 0; this.opacity = opacity; this.speed = speed; this.thickness = thickness; }
+            update() { this.radius += this.speed; if (this.opacity > 0) { this.opacity -= 0.008; } }
+            draw() { ctx.beginPath(); ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2); ctx.strokeStyle = `rgba(0, 123, 255, ${this.opacity})`; ctx.lineWidth = this.thickness; ctx.stroke(); }
+        }
+        function animateWaves() {
+            ctx.clearRect(0, 0, wifiCanvas.width, wifiCanvas.height);
+            if (Math.random() < 0.08) { waves.push(new Wave(1.5, 1, 2.5)); }
+            if (Math.random() < 0.03) { waves.push(new Wave(1, 0.7, 1)); }
+            waves.forEach((wave, index) => { wave.update(); wave.draw(); if (wave.opacity <= 0 && wave.radius > wifiCanvas.width * 0.7) { waves.splice(index, 1); } });
+            requestAnimationFrame(animateWaves);
+        }
+        setCanvasSize(); animateWaves(); window.addEventListener('resize', setCanvasSize);
+    }
+
+    // --- EFEITO 7: CHUVA DIGITAL (PARA about-us.html) ---
+    const aboutUsCanvas = document.getElementById('about-us-canvas');
+    if (aboutUsCanvas) {
+        const ctx = aboutUsCanvas.getContext('2d');
+        const setCanvasSize = () => { aboutUsCanvas.width = aboutUsCanvas.offsetWidth; aboutUsCanvas.height = aboutUsCanvas.offsetHeight; };
+        
+        let raindrops = [];
+        const rainCount = 300; // Aumentei a quantidade de gotas
+
+        class Raindrop {
+            constructor() {
+                this.x = Math.random() * aboutUsCanvas.width;
+                this.y = Math.random() * aboutUsCanvas.height - aboutUsCanvas.height; // Começa acima da tela
+                this.length = 15 + Math.random() * 15; // Comprimento variado
+                this.speed = 4 + Math.random() * 6;
+                this.opacity = 0.2 + Math.random() * 0.5;
             }
             update() {
-                this.radius += this.speed;
-                if (this.opacity > 0) {
-                    this.opacity -= 0.008; // Diminui a opacidade para a onda sumir
+                this.y += this.speed;
+                if (this.y > aboutUsCanvas.height) {
+                    this.y = Math.random() * -100; // Reinicia acima da tela
+                    this.x = Math.random() * aboutUsCanvas.width;
                 }
             }
             draw() {
                 ctx.beginPath();
-                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.moveTo(this.x, this.y);
+                ctx.lineTo(this.x, this.y + this.length);
                 ctx.strokeStyle = `rgba(0, 123, 255, ${this.opacity})`;
-                ctx.lineWidth = this.thickness;
+                ctx.lineWidth = 1.5;
                 ctx.stroke();
             }
         }
-        
-        function animateWaves() {
-            ctx.clearRect(0, 0, wifiCanvas.width, wifiCanvas.height);
-            
-            // Chance de criar ondas diferentes
-            if (Math.random() < 0.08) {
-                waves.push(new Wave(1.5, 1, 2.5)); // Onda principal, mais espessa
-            }
-            if (Math.random() < 0.03) {
-                waves.push(new Wave(1, 0.7, 1)); // Onda secundária, mais lenta e fina
-            }
 
-            waves.forEach((wave, index) => {
-                wave.update();
-                wave.draw();
-                // Remove a onda quando ela se torna invisível E grande o suficiente
-                if (wave.opacity <= 0 && wave.radius > wifiCanvas.width * 0.7) {
-                    waves.splice(index, 1);
-                }
-            });
-            
-            requestAnimationFrame(animateWaves);
+        function initRain() {
+            raindrops = [];
+            for (let i = 0; i < rainCount; i++) {
+                raindrops.push(new Raindrop());
+            }
         }
-        
+
+        function animateRain() {
+            ctx.clearRect(0, 0, aboutUsCanvas.width, aboutUsCanvas.height);
+            raindrops.forEach(drop => {
+                drop.update();
+                drop.draw();
+            });
+            requestAnimationFrame(animateRain);
+        }
+
         setCanvasSize();
-        animateWaves();
-        window.addEventListener('resize', setCanvasSize);
+        initRain();
+        animateRain();
+        window.addEventListener('resize', () => {
+            setCanvasSize();
+            initRain();
+        });
     }
 
     // --- LÓGICA DAS ANIMAÇÕES DE SCROLL ---
