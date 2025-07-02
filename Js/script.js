@@ -76,75 +76,136 @@ document.addEventListener('DOMContentLoaded', () => {
     if (scannerCanvas) {
         const ctx = scannerCanvas.getContext('2d');
         const setCanvasSize = () => { scannerCanvas.width = scannerCanvas.offsetWidth; scannerCanvas.height = scannerCanvas.offsetHeight; };
-        
         let scanY = 0;
         let scanSpeed = 1;
         let points = [];
         const gridSize = 40;
-
         function initPoints() {
             points = [];
             for (let x = 0; x < scannerCanvas.width; x += gridSize) {
                 for (let y = 0; y < scannerCanvas.height; y += gridSize) {
-                    // AQUI ESTÁ A ALTERAÇÃO: de 0.95 para 0.85 para mais bolinhas
-                    if (Math.random() > 0.85) { 
+                    if (Math.random() > 0.85) {
                         points.push({ x: x + Math.random() * 20 - 10, y: y + Math.random() * 20 - 10, size: Math.random() * 2 + 1 });
                     }
                 }
             }
         }
-
         function animateScanner() {
             ctx.clearRect(0, 0, scannerCanvas.width, scannerCanvas.height);
-            
             for (let x = 0; x <= scannerCanvas.width; x += gridSize) {
-                ctx.beginPath();
-                ctx.moveTo(x, 0);
-                ctx.lineTo(x, scannerCanvas.height);
-                ctx.strokeStyle = 'rgba(0, 123, 255, 0.05)';
-                ctx.stroke();
+                ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, scannerCanvas.height);
+                ctx.strokeStyle = 'rgba(0, 123, 255, 0.05)'; ctx.stroke();
             }
             for (let y = 0; y <= scannerCanvas.height; y += gridSize) {
-                ctx.beginPath();
-                ctx.moveTo(0, y);
-                ctx.lineTo(scannerCanvas.width, y);
+                ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(scannerCanvas.width, y);
                 ctx.stroke();
             }
-
             scanY += scanSpeed;
-            if (scanY > scannerCanvas.height || scanY < 0) {
-                scanSpeed *= -1;
-            }
-
+            if (scanY > scannerCanvas.height || scanY < 0) { scanSpeed *= -1; }
             const gradient = ctx.createLinearGradient(0, scanY - 20, 0, scanY);
             gradient.addColorStop(0, 'rgba(0, 123, 255, 0)');
             gradient.addColorStop(1, 'rgba(0, 123, 255, 0.8)');
-            ctx.strokeStyle = gradient;
-            ctx.lineWidth = 2;
-            ctx.beginPath();
-            ctx.moveTo(0, scanY);
-            ctx.lineTo(scannerCanvas.width, scanY);
-            ctx.stroke();
-
+            ctx.strokeStyle = gradient; ctx.lineWidth = 2;
+            ctx.beginPath(); ctx.moveTo(0, scanY); ctx.lineTo(scannerCanvas.width, scanY); ctx.stroke();
             points.forEach(p => {
                 if ((scanSpeed > 0 && p.y < scanY) || (scanSpeed < 0 && p.y > scanY)) {
-                    ctx.beginPath();
-                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                    ctx.fillStyle = 'rgba(0, 123, 255, 0.7)';
-                    ctx.fill();
+                    ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(0, 123, 255, 0.7)'; ctx.fill();
                 }
             });
-
             requestAnimationFrame(animateScanner);
         }
+        setCanvasSize(); initPoints(); animateScanner(); window.addEventListener('resize', () => { setCanvasSize(); initPoints(); });
+    }
+    
+    // --- EFEITO 5: FEIXES DE LUZ (PARA fibre-optics.html) ---
+    const fibreOpticCanvas = document.getElementById('fibre-optic-canvas');
+    if (fibreOpticCanvas) {
+        const ctx = fibreOpticCanvas.getContext('2d');
+        const setCanvasSize = () => { fibreOpticCanvas.width = fibreOpticCanvas.offsetWidth; fibreOpticCanvas.height = fibreOpticCanvas.offsetHeight; };
+        let lightBeams = [];
+        const beamCount = 50;
+        class LightBeam {
+            constructor() {
+                this.y = Math.random() * fibreOpticCanvas.height;
+                this.x = -200;
+                this.speed = 2 + Math.random() * 5;
+                this.length = 100 + Math.random() * 100;
+                this.opacity = 0.1 + Math.random() * 0.5;
+            }
+            update() { this.x += this.speed; }
+            draw() { const gradient = ctx.createLinearGradient(this.x, this.y, this.x + this.length, this.y); gradient.addColorStop(0, `rgba(0, 123, 255, 0)`); gradient.addColorStop(0.5, `rgba(0, 123, 255, ${this.opacity})`); gradient.addColorStop(1, `rgba(0, 123, 255, 0)`); ctx.beginPath(); ctx.moveTo(this.x, this.y); ctx.lineTo(this.x + this.length, this.y); ctx.strokeStyle = gradient; ctx.lineWidth = 1.5; ctx.stroke(); }
+        }
+        function initBeams() { lightBeams = []; for (let i = 0; i < beamCount; i++) { lightBeams.push(new LightBeam()); } }
+        function animateBeams() {
+            ctx.clearRect(0, 0, fibreOpticCanvas.width, fibreOpticCanvas.height);
+            lightBeams.forEach((beam, index) => {
+                beam.update();
+                beam.draw();
+                if (beam.x > fibreOpticCanvas.width) { lightBeams[index] = new LightBeam(); }
+            });
+            requestAnimationFrame(animateBeams);
+        }
+        setCanvasSize(); initBeams(); animateBeams(); window.addEventListener('resize', () => { setCanvasSize(); initBeams(); });
+    }
 
+    // --- EFEITO 6: ONDAS WI-FI (VERSÃO CORRIGIDA E MAIOR) ---
+    const wifiCanvas = document.getElementById('wifi-canvas');
+    if (wifiCanvas) {
+        const ctx = wifiCanvas.getContext('2d');
+        const setCanvasSize = () => { wifiCanvas.width = wifiCanvas.offsetWidth; wifiCanvas.height = wifiCanvas.offsetHeight; };
+        
+        let waves = [];
+        class Wave {
+            constructor(speed, opacity, thickness) {
+                this.x = wifiCanvas.width / 2;
+                this.y = wifiCanvas.height / 2;
+                this.radius = 0;
+                this.opacity = opacity;
+                this.speed = speed;
+                this.thickness = thickness;
+            }
+            update() {
+                this.radius += this.speed;
+                if (this.opacity > 0) {
+                    this.opacity -= 0.008; // Diminui a opacidade para a onda sumir
+                }
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.strokeStyle = `rgba(0, 123, 255, ${this.opacity})`;
+                ctx.lineWidth = this.thickness;
+                ctx.stroke();
+            }
+        }
+        
+        function animateWaves() {
+            ctx.clearRect(0, 0, wifiCanvas.width, wifiCanvas.height);
+            
+            // Chance de criar ondas diferentes
+            if (Math.random() < 0.08) {
+                waves.push(new Wave(1.5, 1, 2.5)); // Onda principal, mais espessa
+            }
+            if (Math.random() < 0.03) {
+                waves.push(new Wave(1, 0.7, 1)); // Onda secundária, mais lenta e fina
+            }
+
+            waves.forEach((wave, index) => {
+                wave.update();
+                wave.draw();
+                // Remove a onda quando ela se torna invisível E grande o suficiente
+                if (wave.opacity <= 0 && wave.radius > wifiCanvas.width * 0.7) {
+                    waves.splice(index, 1);
+                }
+            });
+            
+            requestAnimationFrame(animateWaves);
+        }
+        
         setCanvasSize();
-        initPoints();
-        animateScanner();
-        window.addEventListener('resize', () => {
-            setCanvasSize();
-            initPoints();
-        });
+        animateWaves();
+        window.addEventListener('resize', setCanvasSize);
     }
 
     // --- LÓGICA DAS ANIMAÇÕES DE SCROLL ---
