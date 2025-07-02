@@ -226,7 +226,7 @@ body {
     overflow: hidden;
 }
 
-#particle-canvas, #circuit-canvas, #global-network-canvas{
+#particle-canvas, #circuit-canvas, #global-network-canvas, #scanner-canvas{
     position: absolute;
     top: 0;
     left: 0;

@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setCanvasSize(); initLines(); animateCircuit(); window.addEventListener('resize', () => { setCanvasSize(); initLines(); });
     }
 
-    // --- EFEITO 3: ESFERA DE DADOS INTERATIVA (VERSÃO MELHORADA) ---
+    // --- EFEITO 3: ESFERA DE DADOS INTERATIVA (PARA network-installation.html) ---
     const globalNetworkCanvas = document.getElementById('global-network-canvas');
     if (globalNetworkCanvas) {
         const ctx = globalNetworkCanvas.getContext('2d');
@@ -51,158 +51,99 @@ document.addEventListener('DOMContentLoaded', () => {
         const numNodes = 100;
         let nodes = [];
         let mouse = { x: 0, y: 0 };
-
-        const setCanvasSize = () => {
-            globalNetworkCanvas.width = globalNetworkCanvas.offsetWidth;
-            globalNetworkCanvas.height = globalNetworkCanvas.offsetHeight;
-            sphereCenterX = globalNetworkCanvas.width * 0.75;
-            sphereCenterY = globalNetworkCanvas.height / 2;
-        };
-
+        const setCanvasSize = () => { globalNetworkCanvas.width = globalNetworkCanvas.offsetWidth; globalNetworkCanvas.height = globalNetworkCanvas.offsetHeight; sphereCenterX = globalNetworkCanvas.width * 0.75; sphereCenterY = globalNetworkCanvas.height / 2; };
         class Node {
-            constructor() {
-                this.theta = Math.random() * 2 * Math.PI;
-                this.phi = Math.acos((Math.random() * 2) - 1);
-                this.x = 0; this.y = 0; this.z = 0;
-                this.speed = 0.002 + Math.random() * 0.003;
-            }
-            project(angleX, angleY) {
-                const sinX = Math.sin(angleX); const cosX = Math.cos(angleX);
-                const sinY = Math.sin(angleY); const cosY = Math.cos(angleY);
-                
-                // Rotação 3D
-                const rotX = this.x * cosY + this.z * sinY;
-                const rotZ = -this.x * sinY + this.z * cosY;
-                const rotY = this.y * cosX - rotZ * sinX;
-                const finalZ = this.y * sinX + rotZ * cosX;
-
-                // Projeção 2D
-                const scale = 500 / (500 + finalZ);
-                const projX = (rotX * scale) + sphereCenterX;
-                const projY = (rotY * scale) + sphereCenterY;
-
-                return { x: projX, y: projY, scale: scale };
-            }
+            constructor() { this.theta = Math.random() * 2 * Math.PI; this.phi = Math.acos((Math.random() * 2) - 1); this.x = 0; this.y = 0; this.z = 0; this.speed = 0.002 + Math.random() * 0.003; }
+            project(angleX, angleY) { const sinX = Math.sin(angleX); const cosX = Math.cos(angleX); const sinY = Math.sin(angleY); const cosY = Math.cos(angleY); const rotX = this.x * cosY + this.z * sinY; const rotZ = -this.x * sinY + this.z * cosY; const rotY = this.y * cosX - rotZ * sinX; const finalZ = this.y * sinX + rotZ * cosX; const scale = 500 / (500 + finalZ); const projX = (rotX * scale) + sphereCenterX; const projY = (rotY * scale) + sphereCenterY; return { x: projX, y: projY, scale: scale }; }
         }
-
         class DataParticle {
-            constructor(startNode, endNode) {
-                this.start = startNode;
-                this.end = endNode;
-                this.progress = 0;
-            }
-            update() {
-                this.progress += 0.02;
-            }
-            draw(angleX, angleY) {
-                const p1 = this.start.project(angleX, angleY);
-                const p2 = this.end.project(angleX, angleY);
-                
-                const x = p1.x + (p2.x - p1.x) * this.progress;
-                const y = p1.y + (p2.y - p1.y) * this.progress;
-                
-                ctx.beginPath();
-                ctx.arc(x, y, 1.5 * p1.scale, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(255, 255, 255, ${1 - this.progress})`;
-                ctx.fill();
-            }
+            constructor(startNode, endNode) { this.start = startNode; this.end = endNode; this.progress = 0; }
+            update() { this.progress += 0.02; }
+            draw(angleX, angleY) { const p1 = this.start.project(angleX, angleY); const p2 = this.end.project(angleX, angleY); const x = p1.x + (p2.x - p1.x) * this.progress; const y = p1.y + (p2.y - p1.y) * this.progress; ctx.beginPath(); ctx.arc(x, y, 1.5 * p1.scale, 0, Math.PI * 2); ctx.fillStyle = `rgba(255, 255, 255, ${1 - this.progress})`; ctx.fill(); }
         }
-
         let dataParticles = [];
+        function initSphere() { nodes = []; for (let i = 0; i < numNodes; i++) { const node = new Node(); node.x = sphereRadius * Math.sin(node.phi) * Math.cos(node.theta); node.y = sphereRadius * Math.sin(node.phi) * Math.sin(node.theta); node.z = sphereRadius * Math.cos(node.phi); nodes.push(node); } }
+        let rotationX = 0; let rotationY = 0; let time = 0;
+        function animate() { ctx.clearRect(0, 0, globalNetworkCanvas.width, globalNetworkCanvas.height); time++; rotationX += (mouse.y / globalNetworkCanvas.height - 0.5) * 0.01; rotationY += (mouse.x / globalNetworkCanvas.width - 0.5) * 0.01; rotationY *= 0.99; rotationX *= 0.99; const projectedNodes = nodes.map(node => node.project(rotationX, rotationY)); for (let i = 0; i < projectedNodes.length; i++) { for (let j = i + 1; j < projectedNodes.length; j++) { const p1 = projectedNodes[i]; const p2 = projectedNodes[j]; const dist = Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2)); if (dist < 100) { ctx.beginPath(); ctx.moveTo(p1.x, p1.y); ctx.lineTo(p2.x, p2.y); ctx.strokeStyle = `rgba(0, 123, 255, ${0.4 * (1 - dist / 100)})`; ctx.stroke(); } } }
+        projectedNodes.forEach(p => { ctx.beginPath(); ctx.arc(p.x, p.y, 1.5 * p.scale, 0, Math.PI * 2); ctx.fillStyle = `rgba(255, 255, 255, ${p.scale * 0.9})`; ctx.fill(); }); if (dataParticles.length < 50 && time % 10 === 0) { const startNode = nodes[Math.floor(Math.random() * numNodes)]; const endNode = nodes[Math.floor(Math.random() * numNodes)]; dataParticles.push(new DataParticle(startNode, endNode)); } for (let i = dataParticles.length - 1; i >= 0; i--) { const p = dataParticles[i]; p.update(); p.draw(rotationX, rotationY); if (p.progress >= 1) { dataParticles.splice(i, 1); } }
+        const pulse = Math.sin(time * 0.05) * 5 + 15; const gradient = ctx.createRadialGradient(sphereCenterX, sphereCenterY, 0, sphereCenterX, sphereCenterY, pulse); gradient.addColorStop(0, 'rgba(255, 255, 255, 0.4)'); gradient.addColorStop(1, 'rgba(0, 123, 255, 0)'); ctx.fillStyle = gradient; ctx.beginPath(); ctx.arc(sphereCenterX, sphereCenterY, pulse, 0, Math.PI * 2); ctx.fill(); requestAnimationFrame(animate); }
+        globalNetworkCanvas.addEventListener('mousemove', e => { const rect = globalNetworkCanvas.getBoundingClientRect(); mouse.x = e.clientX - rect.left; mouse.y = e.clientY - rect.top; });
+        setCanvasSize(); initSphere(); animate(); window.addEventListener('resize', () => { setCanvasSize(); initSphere(); });
+    }
+
+    // --- EFEITO 4: SCANNER DIGITAL (PARA site-surveys.html) ---
+    const scannerCanvas = document.getElementById('scanner-canvas');
+    if (scannerCanvas) {
+        const ctx = scannerCanvas.getContext('2d');
+        const setCanvasSize = () => { scannerCanvas.width = scannerCanvas.offsetWidth; scannerCanvas.height = scannerCanvas.offsetHeight; };
         
-        function initSphere() {
-            nodes = [];
-            for (let i = 0; i < numNodes; i++) {
-                const node = new Node();
-                node.x = sphereRadius * Math.sin(node.phi) * Math.cos(node.theta);
-                node.y = sphereRadius * Math.sin(node.phi) * Math.sin(node.theta);
-                node.z = sphereRadius * Math.cos(node.phi);
-                nodes.push(node);
-            }
-        }
+        let scanY = 0;
+        let scanSpeed = 1;
+        let points = [];
+        const gridSize = 40;
 
-        let rotationX = 0;
-        let rotationY = 0;
-        let time = 0;
-
-        function animate() {
-            ctx.clearRect(0, 0, globalNetworkCanvas.width, globalNetworkCanvas.height);
-            time++;
-
-            // Interação com o rato
-            rotationX += (mouse.y / globalNetworkCanvas.height - 0.5) * 0.01;
-            rotationY += (mouse.x / globalNetworkCanvas.width - 0.5) * 0.01;
-            rotationY *= 0.99; // Efeito de suavização
-            rotationX *= 0.99;
-
-            const projectedNodes = nodes.map(node => node.project(rotationX, rotationY));
-
-            // Desenha as linhas de conexão
-            for (let i = 0; i < projectedNodes.length; i++) {
-                for (let j = i + 1; j < projectedNodes.length; j++) {
-                    const p1 = projectedNodes[i];
-                    const p2 = projectedNodes[j];
-                    const dist = Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2));
-                    if (dist < 100) {
-                        ctx.beginPath();
-                        ctx.moveTo(p1.x, p1.y);
-                        ctx.lineTo(p2.x, p2.y);
-                        ctx.strokeStyle = `rgba(0, 123, 255, ${0.4 * (1 - dist / 100)})`;
-                        ctx.stroke();
+        function initPoints() {
+            points = [];
+            for (let x = 0; x < scannerCanvas.width; x += gridSize) {
+                for (let y = 0; y < scannerCanvas.height; y += gridSize) {
+                    // AQUI ESTÁ A ALTERAÇÃO: de 0.95 para 0.85 para mais bolinhas
+                    if (Math.random() > 0.85) { 
+                        points.push({ x: x + Math.random() * 20 - 10, y: y + Math.random() * 20 - 10, size: Math.random() * 2 + 1 });
                     }
                 }
             }
-            
-            // Desenha os nós
-            projectedNodes.forEach(p => {
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, 1.5 * p.scale, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(255, 255, 255, ${p.scale * 0.9})`;
-                ctx.fill();
-            });
-
-            // Cria e anima as partículas de dados
-            if (dataParticles.length < 50 && time % 10 === 0) {
-                const startNode = nodes[Math.floor(Math.random() * numNodes)];
-                const endNode = nodes[Math.floor(Math.random() * numNodes)];
-                dataParticles.push(new DataParticle(startNode, endNode));
-            }
-
-            for (let i = dataParticles.length - 1; i >= 0; i--) {
-                const p = dataParticles[i];
-                p.update();
-                p.draw(rotationX, rotationY);
-                if (p.progress >= 1) {
-                    dataParticles.splice(i, 1);
-                }
-            }
-            
-            // Núcleo pulsante
-            const pulse = Math.sin(time * 0.05) * 5 + 15;
-            const gradient = ctx.createRadialGradient(sphereCenterX, sphereCenterY, 0, sphereCenterX, sphereCenterY, pulse);
-            gradient.addColorStop(0, 'rgba(255, 255, 255, 0.4)');
-            gradient.addColorStop(1, 'rgba(0, 123, 255, 0)');
-            ctx.fillStyle = gradient;
-            ctx.beginPath();
-            ctx.arc(sphereCenterX, sphereCenterY, pulse, 0, Math.PI * 2);
-            ctx.fill();
-
-
-            requestAnimationFrame(animate);
         }
 
-        globalNetworkCanvas.addEventListener('mousemove', e => {
-            const rect = globalNetworkCanvas.getBoundingClientRect();
-            mouse.x = e.clientX - rect.left;
-            mouse.y = e.clientY - rect.top;
-        });
+        function animateScanner() {
+            ctx.clearRect(0, 0, scannerCanvas.width, scannerCanvas.height);
+            
+            for (let x = 0; x <= scannerCanvas.width; x += gridSize) {
+                ctx.beginPath();
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x, scannerCanvas.height);
+                ctx.strokeStyle = 'rgba(0, 123, 255, 0.05)';
+                ctx.stroke();
+            }
+            for (let y = 0; y <= scannerCanvas.height; y += gridSize) {
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(scannerCanvas.width, y);
+                ctx.stroke();
+            }
+
+            scanY += scanSpeed;
+            if (scanY > scannerCanvas.height || scanY < 0) {
+                scanSpeed *= -1;
+            }
+
+            const gradient = ctx.createLinearGradient(0, scanY - 20, 0, scanY);
+            gradient.addColorStop(0, 'rgba(0, 123, 255, 0)');
+            gradient.addColorStop(1, 'rgba(0, 123, 255, 0.8)');
+            ctx.strokeStyle = gradient;
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(0, scanY);
+            ctx.lineTo(scannerCanvas.width, scanY);
+            ctx.stroke();
+
+            points.forEach(p => {
+                if ((scanSpeed > 0 && p.y < scanY) || (scanSpeed < 0 && p.y > scanY)) {
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(0, 123, 255, 0.7)';
+                    ctx.fill();
+                }
+            });
+
+            requestAnimationFrame(animateScanner);
+        }
 
         setCanvasSize();
-        initSphere();
-        animate();
+        initPoints();
+        animateScanner();
         window.addEventListener('resize', () => {
             setCanvasSize();
-            initSphere();
+            initPoints();
         });
     }
 
