@@ -9,6 +9,36 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // --- LÓGICA DO MODAL DE CANDIDATURA ---
+    const applyButtons = document.querySelectorAll('.apply-btn');
+    const modalOverlay = document.getElementById('application-modal');
+    const closeModalBtn = document.querySelector('.close-modal-btn');
+    const jobTitleModal = document.getElementById('job-title-modal');
+    const jobTitleHiddenInput = document.getElementById('job-title-hidden');
+
+    if (modalOverlay) {
+        applyButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const jobCard = button.closest('.job-card');
+                const jobTitle = jobCard.querySelector('h3').textContent;
+                jobTitleModal.textContent = jobTitle;
+                jobTitleHiddenInput.value = jobTitle;
+                modalOverlay.classList.add('active');
+            });
+        });
+
+        const closeModal = () => {
+            modalOverlay.classList.remove('active');
+        }
+
+        closeModalBtn.addEventListener('click', closeModal);
+        modalOverlay.addEventListener('click', (event) => {
+            if (event.target === modalOverlay) {
+                closeModal();
+            }
+        });
+    }
+
     // --- EFEITO 1: PARTÍCULAS DE REDE (PARA services.html) ---
     const particleCanvas = document.getElementById('particle-canvas');
     if (particleCanvas) {
@@ -170,62 +200,67 @@ document.addEventListener('DOMContentLoaded', () => {
         setCanvasSize(); animateWaves(); window.addEventListener('resize', setCanvasSize);
     }
 
-    // --- EFEITO 7: CHUVA DIGITAL (PARA about-us.html) ---
+    // --- EFEITO 7: REDE NEURAL / PLEXUS (PARA about-us.html) ---
     const aboutUsCanvas = document.getElementById('about-us-canvas');
     if (aboutUsCanvas) {
         const ctx = aboutUsCanvas.getContext('2d');
         const setCanvasSize = () => { aboutUsCanvas.width = aboutUsCanvas.offsetWidth; aboutUsCanvas.height = aboutUsCanvas.offsetHeight; };
-        
-        let raindrops = [];
-        const rainCount = 300; // Aumentei a quantidade de gotas
-
-        class Raindrop {
+        let plexusNodes = [];
+        const plexusNodeCount = 100;
+        class PlexusNode {
             constructor() {
                 this.x = Math.random() * aboutUsCanvas.width;
-                this.y = Math.random() * aboutUsCanvas.height - aboutUsCanvas.height; // Começa acima da tela
-                this.length = 15 + Math.random() * 15; // Comprimento variado
-                this.speed = 4 + Math.random() * 6;
-                this.opacity = 0.2 + Math.random() * 0.5;
+                this.y = Math.random() * aboutUsCanvas.height;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.radius = 1 + Math.random() * 2;
             }
             update() {
-                this.y += this.speed;
-                if (this.y > aboutUsCanvas.height) {
-                    this.y = Math.random() * -100; // Reinicia acima da tela
-                    this.x = Math.random() * aboutUsCanvas.width;
-                }
+                this.x += this.vx;
+                this.y += this.vy;
+                if (this.x < 0 || this.x > aboutUsCanvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > aboutUsCanvas.height) this.vy *= -1;
             }
             draw() {
                 ctx.beginPath();
-                ctx.moveTo(this.x, this.y);
-                ctx.lineTo(this.x, this.y + this.length);
-                ctx.strokeStyle = `rgba(0, 123, 255, ${this.opacity})`;
-                ctx.lineWidth = 1.5;
-                ctx.stroke();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(0, 123, 255, 0.7)';
+                ctx.fill();
             }
         }
-
-        function initRain() {
-            raindrops = [];
-            for (let i = 0; i < rainCount; i++) {
-                raindrops.push(new Raindrop());
+        function initPlexus() {
+            plexusNodes = [];
+            for (let i = 0; i < plexusNodeCount; i++) {
+                plexusNodes.push(new PlexusNode());
             }
         }
-
-        function animateRain() {
+        function animatePlexus() {
             ctx.clearRect(0, 0, aboutUsCanvas.width, aboutUsCanvas.height);
-            raindrops.forEach(drop => {
-                drop.update();
-                drop.draw();
+            plexusNodes.forEach(node => {
+                node.update();
+                node.draw();
             });
-            requestAnimationFrame(animateRain);
+            for (let i = 0; i < plexusNodes.length; i++) {
+                for (let j = i + 1; j < plexusNodes.length; j++) {
+                    const dist = Math.sqrt(Math.pow(plexusNodes[i].x - plexusNodes[j].x, 2) + Math.pow(plexusNodes[i].y - plexusNodes[j].y, 2));
+                    if (dist < 150) {
+                        ctx.beginPath();
+                        ctx.moveTo(plexusNodes[i].x, plexusNodes[i].y);
+                        ctx.lineTo(plexusNodes[j].x, plexusNodes[j].y);
+                        ctx.strokeStyle = `rgba(0, 123, 255, ${0.5 * (1 - dist / 150)})`;
+                        ctx.lineWidth = 1;
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animatePlexus);
         }
-
         setCanvasSize();
-        initRain();
-        animateRain();
+        initPlexus();
+        animatePlexus();
         window.addEventListener('resize', () => {
             setCanvasSize();
-            initRain();
+            initPlexus();
         });
     }
 
@@ -243,39 +278,3 @@ document.addEventListener('DOMContentLoaded', () => {
         animatedElements.forEach(element => { observer.observe(element); });
     }
 });
-
-// --- LÓGICA DO MODAL DE CANDIDATURA ---
-    const applyButtons = document.querySelectorAll('.apply-btn');
-    const modalOverlay = document.getElementById('application-modal');
-    const closeModalBtn = document.querySelector('.close-modal-btn');
-    const jobTitleModal = document.getElementById('job-title-modal');
-    const jobTitleHiddenInput = document.getElementById('job-title-hidden');
-
-    if (modalOverlay) {
-        applyButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                // Pega o título da vaga do elemento h3 irmão
-                const jobCard = button.closest('.job-card');
-                const jobTitle = jobCard.querySelector('h3').textContent;
-
-                // Atualiza o título no modal e no campo escondido do formulário
-                jobTitleModal.textContent = jobTitle;
-                jobTitleHiddenInput.value = jobTitle;
-                
-                // Mostra o modal
-                modalOverlay.classList.add('active');
-            });
-        });
-
-        const closeModal = () => {
-            modalOverlay.classList.remove('active');
-        }
-
-        closeModalBtn.addEventListener('click', closeModal);
-        modalOverlay.addEventListener('click', (event) => {
-            // Fecha o modal apenas se o clique for no fundo cinza
-            if (event.target === modalOverlay) {
-                closeModal();
-            }
-        });
-    }
