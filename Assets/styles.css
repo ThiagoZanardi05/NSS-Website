@@ -148,7 +148,7 @@ body {
 /* ESTILOS DA PÁGINA DE SERVIÇOS (DETALHE) */
 /* ======================================= */
 .service-hero-section { position: relative; background-color: var(--dark-blue); color: #fff; padding: 60px 0; text-align: center; overflow: hidden; }
-#particle-canvas, #circuit-canvas, #global-network-canvas, #scanner-canvas, #fibre-optic-canvas, #wifi-canvas, #about-us-canvas, #electrical-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+#particle-canvas, #circuit-canvas, #global-network-canvas, #scanner-canvas, #fibre-optic-canvas, #wifi-canvas, #about-us-canvas, #electrical-canvas, #epos-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
 .service-hero-section .container { position: relative; z-index: 2; }
 .breadcrumbs { margin-bottom: 1rem; font-size: 0.9rem; }
 .breadcrumbs a { color: #fff; text-decoration: none; opacity: 0.8; }

@@ -338,6 +338,71 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+
+    // --- NOVO EFEITO 9: PIXELS DIGITAIS (PARA epos.html) ---
+    const eposCanvas = document.getElementById('epos-canvas');
+    if (eposCanvas) {
+        const ctx = eposCanvas.getContext('2d');
+        const setCanvasSize = () => { eposCanvas.width = eposCanvas.offsetWidth; eposCanvas.height = eposCanvas.offsetHeight; };
+
+        let pixels = [];
+        const pixelSize = 10;
+        let cols, rows;
+
+        class Pixel {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.opacity = 0;
+                this.targetOpacity = 0;
+                this.speed = 0.05;
+            }
+            update() {
+                this.opacity += (this.targetOpacity - this.opacity) * this.speed;
+                if (Math.random() < 0.01) {
+                    this.targetOpacity = Math.random() * 0.7;
+                }
+            }
+            draw() {
+                if(this.opacity > 0.01) {
+                    ctx.fillStyle = `rgba(0, 123, 255, ${this.opacity})`;
+                    ctx.fillRect(this.x * pixelSize, this.y * pixelSize, pixelSize, pixelSize);
+                }
+            }
+        }
+
+        function initPixels() {
+            pixels = [];
+            cols = Math.floor(eposCanvas.width / pixelSize);
+            rows = Math.floor(eposCanvas.height / pixelSize);
+            for (let y = 0; y < rows; y++) {
+                pixels[y] = [];
+                for (let x = 0; x < cols; x++) {
+                    pixels[y][x] = new Pixel(x, y);
+                }
+            }
+        }
+
+        function animatePixels() {
+            ctx.clearRect(0, 0, eposCanvas.width, eposCanvas.height);
+            for (let y = 0; y < rows; y++) {
+                for (let x = 0; x < cols; x++) {
+                    pixels[y][x].update();
+                    pixels[y][x].draw();
+                }
+            }
+            requestAnimationFrame(animatePixels);
+        }
+
+        setCanvasSize();
+        initPixels();
+        animatePixels();
+        window.addEventListener('resize', () => {
+            setCanvasSize();
+            initPixels();
+        });
+    }
+
     // --- LÓGICA DAS ANIMAÇÕES DE SCROLL ---
     const animatedElements = document.querySelectorAll('.animate-on-scroll');
     if (animatedElements.length > 0) {
