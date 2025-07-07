@@ -51,45 +51,6 @@ body {
 .section-header h2 { font-family: var(--heading-font); font-size: 2.5rem; color: var(--dark-blue); margin-bottom: 10px; }
 .section-header p { max-width: 600px; margin: 0 auto; }
 
-<<<<<<< HEAD
-=======
-/* Services Section (Homepage) */
-.services-section { padding: 80px 0; background: #fff; }
-.services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
-.service-card {
-    background: var(--light-gray);
-    padding: 30px;
-    text-align: center;
-    border-radius: 8px;
-    border: 1px solid #e0e0e0;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.service-card:hover {
-    transform: translateY(-5px) scale(1.05);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-}
-.service-card i { font-size: 2.5rem; color: var(--primary-blue); margin-bottom: 15px; }
-.service-card h3 { font-family: var(--heading-font); margin-bottom: 10px; }
-.service-card-link { text-decoration: none; color: inherit; }
-
-
-/* Why NSS Section */
-.why-nss-section { padding: 80px 0; background-color: var(--light-gray); }
-.why-nss-container { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
-.why-nss-image img { width: 100%; border-radius: 8px; }
-.why-nss-content .section-header { text-align: left; margin-bottom: 20px; }
-.why-nss-content p { margin-bottom: 20px; }
-.why-nss-list { list-style: none; }
-.why-nss-list li { margin-bottom: 15px; font-weight: 700; display: flex; align-items: center; }
-.why-nss-list i { color: var(--primary-blue); margin-right: 10px; font-size: 1.2rem; }
-
-/* Mission & Vision Section */
-.mission-vision-section { padding: 80px 0; }
-.mission-vision-container { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-.mission-card, .vision-card { padding: 30px; border: 1px solid #e0e0e0; border-radius: 8px; border-left: 5px solid var(--primary-blue); }
-.mission-card h3, .vision-card h3 { font-family: var(--heading-font); margin-bottom: 15px; color: var(--dark-blue); }
-
->>>>>>> 81e45af4df7333e9b6bdf7a89fa36d54c53e4fe6
 /* Final CTA */
 .final-cta { background: var(--dark-blue); color: #fff; padding: 60px 20px; }
 .final-cta .container { display: flex; flex-direction: column; align-items: center; text-align: center; }
@@ -131,7 +92,15 @@ body {
 /* ======================================= */
 
 /* --- Homepage (index.html) --- */
-.hero-section { background: linear-gradient(rgba(13, 44, 74, 0.7), rgba(13, 44, 74, 0.7)), url('../images/hero-background.jpg') no-repeat center center/cover; height: 60vh; display: flex; align-items: center; justify-content: center; text-align: center; color: #fff; }
+.hero-section { 
+    background: linear-gradient(rgba(13, 44, 74, 0.7), rgba(13, 44, 74, 0.7)), url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop') no-repeat center center/cover; 
+    height: 60vh; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    text-align: center; 
+    color: #fff; 
+}
 .hero-content h1 { font-family: var(--heading-font); font-size: 3.5rem; margin-bottom: 1rem; }
 .hero-content p { font-size: 1.2rem; max-width: 700px; margin: 0 auto 2rem auto; }
 .trusted-by { background: var(--light-gray); padding: 20px 0; text-align: center; }
@@ -189,8 +158,6 @@ body {
 .service-hub-icon { font-size: 3rem; color: var(--primary-blue); margin-bottom: 1.5rem; }
 .service-hub-card h3 { font-family: var(--heading-font); font-size: 1.5rem; margin-bottom: 0.5rem; }
 .service-hub-card p { font-size: 1rem; color: #6c757d; }
-.support-info { background-color: var(--light-gray); border-left: 5px solid var(--primary-blue); padding: 20px; margin: 0 auto 50px auto; max-width: 800px; text-align: center; }
-.support-info p { font-size: 1.1rem; line-height: 1.7; }
 
 /* --- Página About Us --- */
 .about-overview-section { padding: 80px 0; }
@@ -247,13 +214,12 @@ body {
 .job-location { color: #6c757d; font-weight: 700; }
 .job-location i { margin-right: 5px; }
 
-<<<<<<< HEAD
 /* ======================================= */
 /* ESTILOS DO MODAL DE CANDIDATURA         */
 /* ======================================= */
 .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.6); display: flex; justify-content: center; align-items: center; z-index: 2000; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; }
 .modal-overlay.active { opacity: 1; visibility: visible; }
-.modal-content { background-color: #fff; padding: 40px; border-radius: 8px; width: 90%; max-width: 600px; position: relative; transform: translateY(-50px); transition: transform 0.3s ease; max-height: 85vh; overflow-y: auto; /* Adiciona scroll vertical */ }
+.modal-content { background-color: #fff; padding: 40px; border-radius: 8px; width: 90%; max-width: 600px; position: relative; transform: translateY(-50px); transition: transform 0.3s ease; max-height: 85vh; overflow-y: auto; }
 .modal-overlay.active .modal-content { transform: translateY(0); }
 .modal-content h2 { font-family: var(--heading-font); color: var(--dark-blue); margin-bottom: 10px; }
 .modal-content p { margin-bottom: 30px; }
@@ -262,8 +228,6 @@ body {
 #modal-cv { padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
 
 
-=======
->>>>>>> 81e45af4df7333e9b6bdf7a89fa36d54c53e4fe6
 /* ======================================= */
 /* RESPONSIVIDADE - APLICA-SE A TODAS AS PÁGINAS */
 /* ======================================= */
