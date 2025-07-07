@@ -61,37 +61,42 @@
                 </div>
 
                 <div class="contact-form-container">
-                    <form action="#" method="POST" class="contact-form">
+                    <form action="https://api.web3forms.com/submit" method="POST" class="contact-form">
+                        
+                        <input type="hidden" name="access_key" value="fb53e02a-9294-4ff1-9bac-a976da3c5586">
+
                         <div class="form-group">
                             <label for="full-name">Full Name</label>
-                            <input type="text" id="full-name" name="full-name" required>
+                            <input type="text" id="full-name" name="Full Name" required>
                         </div>
                         <div class="form-group">
                             <label for="company">Company</label>
-                            <input type="text" id="company" name="company">
+                            <input type="text" id="company" name="Company">
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required>
+                            <input type="email" id="email" name="Email" required>
                         </div>
                         <div class="form-group">
                             <label for="phone">Phone</label>
-                            <input type="tel" id="phone" name="phone">
+                            <input type="tel" id="phone" name="Phone">
                         </div>
                         <div class="form-group">
                             <label for="service-interest">Service Interested In</label>
-                            <select id="service-interest" name="service-interest">
+                            <select id="service-interest" name="Service Interest">
                                 <option value="">-- Please Select --</option>
                                 <option value="Network Installation">Network Installation</option>
                                 <option value="Site Surveys">Site Surveys</option>
                                 <option value="Data Cabling">Data Cabling</option>
                                 <option value="Fibre Optics">Fibre Optics</option>
                                 <option value="Wireless Solutions">Wireless Solutions</option>
+                                <option value="Electrical Surveys">Electrical Surveys</option>
+                                <option value="EPOS Solutions">EPOS Solutions</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="message">Message</label>
-                            <textarea id="message" name="message" rows="5" required></textarea>
+                            <textarea id="message" name="Message" rows="5" required></textarea>
                         </div>
                         <div class="form-group-checkbox">
                             <input type="checkbox" id="gdpr" name="gdpr" required>

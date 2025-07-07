@@ -28,6 +28,10 @@ body {
     padding: 0 20px;
 }
 
+/* ======================================= */
+/* COMPONENTES GLOBAIS (HEADER, FOOTER, ETC) */
+/* ======================================= */
+
 /* Header */
 .main-header { background: #fff; padding: 15px 0; border-bottom: 1px solid #e0e0e0; position: sticky; top: 0; z-index: 1000; }
 .main-header .container { display: flex; justify-content: space-between; align-items: center; }
@@ -42,76 +46,10 @@ body {
 .btn-primary:hover { background: var(--dark-blue); }
 .mobile-nav-toggle { display: none; }
 
-/* Hero Section */
-.hero-section { background: linear-gradient(rgba(13, 44, 74, 0.7), rgba(13, 44, 74, 0.7)), url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop') no-repeat center center/cover; height: 60vh; display: flex; align-items: center; justify-content: center; text-align: center; color: #fff; }
-.hero-content h1 { font-family: var(--heading-font); font-size: 3.5rem; margin-bottom: 1rem; }
-.hero-content p { font-size: 1.2rem; max-width: 700px; margin: 0 auto 2rem auto; }
-
-/* Trusted By Section */
-.trusted-by { background: var(--light-gray); padding: 20px 0; text-align: center; }
-.trusted-by p { font-weight: 700; margin-bottom: 15px; }
-
-/* ======================================= */
-/* ESTILOS PARA LOGOS DE PARCEIROS         */
-/* ======================================= */
-.logos {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 50px;
-    flex-wrap: wrap;
-}
-.logos img {
-    max-height: 50px;
-    width: auto;
-    filter: grayscale(100%);
-    opacity: 0.7;
-    transition: all 0.3s ease;
-}
-.logos img:hover {
-    filter: grayscale(0%);
-    opacity: 1;
-}
-
 /* General Section Styling */
 .section-header { text-align: center; margin-bottom: 50px; }
 .section-header h2 { font-family: var(--heading-font); font-size: 2.5rem; color: var(--dark-blue); margin-bottom: 10px; }
 .section-header p { max-width: 600px; margin: 0 auto; }
-
-/* Services Section (Homepage) */
-.services-section { padding: 80px 0; background: #fff; }
-.services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
-.service-card {
-    background: var(--light-gray);
-    padding: 30px;
-    text-align: center;
-    border-radius: 8px;
-    border: 1px solid #e0e0e0;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.service-card:hover {
-    transform: translateY(-5px) scale(1.05);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-}
-.service-card i { font-size: 2.5rem; color: var(--primary-blue); margin-bottom: 15px; }
-.service-card h3 { font-family: var(--heading-font); margin-bottom: 10px; }
-.service-card-link { text-decoration: none; color: inherit; }
-
-/* Why NSS Section */
-.why-nss-section { padding: 80px 0; background-color: var(--light-gray); }
-.why-nss-container { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
-.why-nss-image img { width: 100%; border-radius: 8px; }
-.why-nss-content .section-header { text-align: left; margin-bottom: 20px; }
-.why-nss-content p { margin-bottom: 20px; }
-.why-nss-list { list-style: none; }
-.why-nss-list li { margin-bottom: 15px; font-weight: 700; display: flex; align-items: center; }
-.why-nss-list i { color: var(--primary-blue); margin-right: 10px; font-size: 1.2rem; }
-
-/* Mission & Vision Section */
-.mission-vision-section { padding: 80px 0; }
-.mission-vision-container { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-.mission-card, .vision-card { padding: 30px; border: 1px solid #e0e0e0; border-radius: 8px; border-left: 5px solid var(--primary-blue); }
-.mission-card h3, .vision-card h3 { font-family: var(--heading-font); margin-bottom: 15px; color: var(--dark-blue); }
 
 /* Final CTA */
 .final-cta { background: var(--dark-blue); color: #fff; padding: 60px 20px; }
@@ -128,27 +66,48 @@ body {
 .footer-links a:hover { color: var(--primary-blue); }
 .footer-bottom { text-align: center; padding: 20px 0; margin-top: 40px; border-top: 1px solid #2a4a6c; }
 
-/* ESTILOS PARA ANIMAÇÃO DE SCROLL (FADE-IN) */
+/* Animações de Scroll */
 .animate-on-scroll { opacity: 0; transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
 .fade-in-left { transform: translateX(-50px); }
 .animate-on-scroll.visible { opacity: 1; transform: translateX(0); }
 
-/* ======================================= */
-/* ESTILOS DA PÁGINA HUB DE SERVIÇOS       */
-/* ======================================= */
-.services-hub-section { padding: 80px 0; }
-.services-hub-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
-.service-hub-card { display: block; text-decoration: none; color: var(--text-color); border: 1px solid #e0e0e0; padding: 40px 30px; text-align: center; border-radius: 8px; transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; }
-.service-hub-card:hover { transform: translateY(-10px); box-shadow: 0 10px 25px rgba(0,0,0,0.08); border-color: var(--primary-blue); }
-.service-hub-icon { font-size: 3rem; color: var(--primary-blue); margin-bottom: 1.5rem; }
-.service-hub-card h3 { font-family: var(--heading-font); font-size: 1.5rem; margin-bottom: 0.5rem; }
-.service-hub-card p { font-size: 1rem; color: #6c757d; }
 
 /* ======================================= */
-/* ESTILOS DA PÁGINA DE SERVIÇOS (DETALHE) */
+/* ESTILOS ESPECÍFICOS DE CADA PÁGINA      */
 /* ======================================= */
+
+/* --- Homepage (index.html) --- */
+.hero-section { background: linear-gradient(rgba(13, 44, 74, 0.7), rgba(13, 44, 74, 0.7)), url('../images/hero-background.jpg') no-repeat center center/cover; height: 60vh; display: flex; align-items: center; justify-content: center; text-align: center; color: #fff; }
+.hero-content h1 { font-family: var(--heading-font); font-size: 3.5rem; margin-bottom: 1rem; }
+.hero-content p { font-size: 1.2rem; max-width: 700px; margin: 0 auto 2rem auto; }
+.trusted-by { background: var(--light-gray); padding: 20px 0; text-align: center; }
+.trusted-by p { font-weight: 700; margin-bottom: 15px; }
+.logos { display: flex; justify-content: center; align-items: center; gap: 50px; flex-wrap: wrap; }
+.logos img { max-height: 50px; width: auto; filter: grayscale(100%); opacity: 0.7; transition: all 0.3s ease; }
+.logos img:hover { filter: grayscale(0%); opacity: 1; }
+.services-section { padding: 80px 0; background: #fff; }
+.services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+.service-card { background: var(--light-gray); padding: 30px; text-align: center; border-radius: 8px; border: 1px solid #e0e0e0; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.service-card:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+.service-card i { font-size: 2.5rem; color: var(--primary-blue); margin-bottom: 15px; }
+.service-card h3 { font-family: var(--heading-font); margin-bottom: 10px; }
+.service-card-link { text-decoration: none; color: inherit; }
+.why-nss-section { padding: 80px 0; background-color: var(--light-gray); }
+.why-nss-container { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+.why-nss-image img { width: 100%; border-radius: 8px; }
+.why-nss-content .section-header { text-align: left; margin-bottom: 20px; }
+.why-nss-content p { margin-bottom: 20px; }
+.why-nss-list { list-style: none; }
+.why-nss-list li { margin-bottom: 15px; font-weight: 700; display: flex; align-items: center; }
+.why-nss-list i { color: var(--primary-blue); margin-right: 10px; font-size: 1.2rem; }
+.mission-vision-section { padding: 80px 0; }
+.mission-vision-container { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+.mission-card, .vision-card { padding: 30px; border: 1px solid #e0e0e0; border-radius: 8px; border-left: 5px solid var(--primary-blue); }
+.mission-card h3, .vision-card h3 { font-family: var(--heading-font); margin-bottom: 15px; color: var(--dark-blue); }
+
+/* --- Páginas de Serviço (todas) --- */
 .service-hero-section { position: relative; background-color: var(--dark-blue); color: #fff; padding: 60px 0; text-align: center; overflow: hidden; }
-#particle-canvas, #circuit-canvas, #global-network-canvas, #scanner-canvas, #fibre-optic-canvas, #wifi-canvas, #about-us-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+#particle-canvas, #circuit-canvas, #global-network-canvas, #scanner-canvas, #fibre-optic-canvas, #wifi-canvas, #about-us-canvas, #electrical-canvas, #epos-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
 .service-hero-section .container { position: relative; z-index: 2; }
 .breadcrumbs { margin-bottom: 1rem; font-size: 0.9rem; }
 .breadcrumbs a { color: #fff; text-decoration: none; opacity: 0.8; }
@@ -168,9 +127,18 @@ body {
 .step-number { width: 60px; height: 60px; line-height: 60px; border-radius: 50%; background-color: var(--primary-blue); color: #fff; font-size: 1.8rem; font-weight: 700; margin: 0 auto 1.5rem auto; }
 .step h3 { font-family: var(--heading-font); margin-bottom: 0.5rem; }
 
-/* ======================================= */
-/* ESTILOS DA PÁGINA ABOUT US              */
-/* ======================================= */
+/* --- Página Hub de Serviços (services.html) --- */
+.services-hub-section { padding: 80px 0; }
+.services-hub-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+.service-hub-card { display: block; text-decoration: none; color: var(--text-color); border: 1px solid #e0e0e0; padding: 40px 30px; text-align: center; border-radius: 8px; transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; }
+.service-hub-card:hover { transform: translateY(-10px); box-shadow: 0 10px 25px rgba(0,0,0,0.08); border-color: var(--primary-blue); }
+.service-hub-icon { font-size: 3rem; color: var(--primary-blue); margin-bottom: 1.5rem; }
+.service-hub-card h3 { font-family: var(--heading-font); font-size: 1.5rem; margin-bottom: 0.5rem; }
+.service-hub-card p { font-size: 1rem; color: #6c757d; }
+.support-info { background-color: var(--light-gray); border-left: 5px solid var(--primary-blue); padding: 20px; margin: 0 auto 50px auto; max-width: 800px; text-align: center; }
+.support-info p { font-size: 1.1rem; line-height: 1.7; }
+
+/* --- Página About Us --- */
 .about-overview-section { padding: 80px 0; }
 .about-overview-container { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
 .about-overview-image img { width: 100%; border-radius: 8px; }
@@ -187,9 +155,7 @@ body {
 .accreditation-card { text-align: center; }
 .accreditation-card img { max-height: 80px; width: auto; margin-bottom: 1.5rem; }
 
-/* ======================================= */
-/* ESTILOS DA PÁGINA DE CONTATO            */
-/* ======================================= */
+/* --- Página de Contato --- */
 .contact-main-section { padding: 80px 0; }
 .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
 .contact-info-map h2 { font-family: var(--heading-font); font-size: 2.5rem; color: var(--dark-blue); margin-bottom: 1.5rem; }
@@ -213,9 +179,7 @@ body {
 .form-group-checkbox label { margin-bottom: 0; font-weight: normal; }
 .contact-form button { width: 100%; padding: 15px; font-size: 1.1rem; }
 
-/* ======================================= */
-/* ESTILOS DA PÁGINA DE CARREIRAS          */
-/* ======================================= */
+/* --- Página de Carreiras --- */
 .careers-main-section { padding: 80px 0; }
 .careers-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 60px; }
 .benefits-container h2,
@@ -229,79 +193,19 @@ body {
 .job-location { color: #6c757d; font-weight: 700; }
 .job-location i { margin-right: 5px; }
 
-
 /* ======================================= */
 /* ESTILOS DO MODAL DE CANDIDATURA         */
 /* ======================================= */
+.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.6); display: flex; justify-content: center; align-items: center; z-index: 2000; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; }
+.modal-overlay.active { opacity: 1; visibility: visible; }
+.modal-content { background-color: #fff; padding: 40px; border-radius: 8px; width: 90%; max-width: 600px; position: relative; transform: translateY(-50px); transition: transform 0.3s ease; max-height: 85vh; overflow-y: auto; /* Adiciona scroll vertical */ }
+.modal-overlay.active .modal-content { transform: translateY(0); }
+.modal-content h2 { font-family: var(--heading-font); color: var(--dark-blue); margin-bottom: 10px; }
+.modal-content p { margin-bottom: 30px; }
+.close-modal-btn { position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 2.5rem; color: #aaa; cursor: pointer; line-height: 1; }
+.close-modal-btn:hover { color: #333; }
+#modal-cv { padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
 
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 2000;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-}
-
-.modal-overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-.modal-content {
-    background-color: #fff;
-    padding: 40px;
-    border-radius: 8px;
-    width: 90%;
-    max-width: 600px;
-    position: relative;
-    transform: translateY(-50px);
-    transition: transform 0.3s ease;
-}
-
-.modal-overlay.active .modal-content {
-    transform: translateY(0);
-}
-
-.modal-content h2 {
-    font-family: var(--heading-font);
-    color: var(--dark-blue);
-    margin-bottom: 10px;
-}
-
-.modal-content p {
-    margin-bottom: 30px;
-}
-
-.close-modal-btn {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    background: none;
-    border: none;
-    font-size: 2.5rem;
-    color: #aaa;
-    cursor: pointer;
-    line-height: 1;
-}
-
-.close-modal-btn:hover {
-    color: #333;
-}
-
-/* Estilo para o campo de upload de arquivo */
-#modal-cv {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
 
 /* ======================================= */
 /* RESPONSIVIDADE - APLICA-SE A TODAS AS PÁGINAS */

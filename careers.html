@@ -16,7 +16,6 @@
                 <a href="index.html">Home</a>
                 <a href="about-us.html">About Us</a>
                 <a href="services.html">Services</a>
-                <a href="#">Projects</a>
                 <a href="contact.html">Contact</a>
             </nav>
             <a href="#" class="btn btn-contact">Request a Quote</a>
@@ -81,24 +80,35 @@
             <h2>Apply for <span id="job-title-modal">Job Title</span></h2>
             <p>Please fill out the form below to submit your application.</p>
             
-            <form action="https://api.web3forms.com/submit" method="POST" enctype="multipart/form-data" class="contact-form">
+            <form action="https://api.web3forms.com/submit" method="POST" class="contact-form">
                 
-                <input type="hidden" name="access_key" value="SUA_CHAVE_DE_ACESSO_AQUI">
-                
+                <input type="hidden" name="access_key" value="fb53e02a-9294-4ff1-9bac-a976da3c5586">
                 <input type="hidden" id="job-title-hidden" name="job-title" value="">
 
                 <div class="form-group">
                     <label for="modal-full-name">Full Name</label>
-                    <input type="text" id="modal-full-name" name="full-name" required>
+                    <input type="text" id="modal-full-name" name="Full Name" required>
                 </div>
                 <div class="form-group">
                     <label for="modal-email">Email</label>
-                    <input type="email" id="modal-email" name="email" required>
+                    <input type="email" id="modal-email" name="Email" required>
                 </div>
+
                 <div class="form-group">
-                    <label for="modal-cv">Upload CV (PDF, DOC, DOCX)</label>
-                    <input type="file" id="modal-cv" name="cv-upload" accept=".pdf,.doc,.docx" required>
+                    <label for="modal-experience">Years of Relevant Experience</label>
+                    <input type="text" id="modal-experience" name="Experience Years">
                 </div>
+                
+                <div class="form-group">
+                    <label for="modal-skills">Key Skills (comma-separated)</label>
+                    <input type="text" id="modal-skills" name="Key Skills" placeholder="e.g., Network Design, Fusion Splicing, Project Management">
+                </div>
+
+                <div class="form-group">
+                    <label for="modal-cover-letter">Brief Cover Letter / About You</label>
+                    <textarea id="modal-cover-letter" name="Cover Letter" rows="6" placeholder="Tell us a bit about yourself and why you're a good fit for this role." required></textarea>
+                </div>
+                
                 <div class="form-group-checkbox">
                     <input type="checkbox" id="modal-gdpr" name="gdpr" required>
                     <label for="modal-gdpr">I consent to NSS storing my submitted data.</label>
