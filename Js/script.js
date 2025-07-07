@@ -264,6 +264,145 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // --- NOVO EFEITO 8: PULSOS ELÉTRICOS (PARA electrical-surveys.html) ---
+    const electricalCanvas = document.getElementById('electrical-canvas');
+    if(electricalCanvas) {
+        const ctx = electricalCanvas.getContext('2d');
+        const setCanvasSize = () => { electricalCanvas.width = electricalCanvas.offsetWidth; electricalCanvas.height = electricalCanvas.offsetHeight; };
+
+        let nodes = [];
+        const nodeCount = 20;
+
+        class ElectricalNode {
+            constructor() {
+                this.x = Math.random() * electricalCanvas.width;
+                this.y = Math.random() * electricalCanvas.height;
+                this.radius = Math.random() * 5 + 5;
+                this.pulse = 0;
+                this.pulseSpeed = 0.05;
+            }
+            update() {
+                this.pulse += this.pulseSpeed;
+            }
+            draw() {
+                const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.radius * Math.abs(Math.sin(this.pulse)));
+                gradient.addColorStop(0, 'rgba(0, 123, 255, 0.5)');
+                gradient.addColorStop(1, 'rgba(0, 123, 255, 0)');
+                ctx.fillStyle = gradient;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius * Math.abs(Math.sin(this.pulse)), 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initElectricalNodes() {
+            nodes = [];
+            for(let i = 0; i < nodeCount; i++) {
+                nodes.push(new ElectricalNode());
+            }
+        }
+
+        function animateElectrical() {
+            ctx.clearRect(0, 0, electricalCanvas.width, electricalCanvas.height);
+
+            nodes.forEach(node => {
+                node.update();
+                node.draw();
+            });
+            
+            // Desenha arcos elétricos entre nós aleatórios
+            for(let i = 0; i < 5; i++) {
+                const node1 = nodes[Math.floor(Math.random() * nodeCount)];
+                const node2 = nodes[Math.floor(Math.random() * nodeCount)];
+                
+                ctx.beginPath();
+                ctx.moveTo(node1.x, node1.y);
+                ctx.quadraticCurveTo(
+                    Math.random() * electricalCanvas.width, Math.random() * electricalCanvas.height,
+                    node2.x, node2.y
+                );
+                ctx.strokeStyle = `rgba(0, 123, 255, ${Math.random() * 0.5})`;
+                ctx.lineWidth = 1;
+                ctx.stroke();
+            }
+
+            requestAnimationFrame(animateElectrical);
+        }
+
+        setCanvasSize();
+        initElectricalNodes();
+        animateElectrical();
+        window.addEventListener('resize', () => {
+            setCanvasSize();
+            initElectricalNodes();
+        });
+    }
+
+
+    // --- NOVO EFEITO 9: PIXELS DIGITAIS (PARA epos.html) ---
+    const eposCanvas = document.getElementById('epos-canvas');
+    if (eposCanvas) {
+        const ctx = eposCanvas.getContext('2d');
+        const setCanvasSize = () => { eposCanvas.width = eposCanvas.offsetWidth; eposCanvas.height = eposCanvas.offsetHeight; };
+
+        let pixels = [];
+        const pixelSize = 10;
+        let cols, rows;
+
+        class Pixel {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.opacity = 0;
+                this.targetOpacity = 0;
+                this.speed = 0.05;
+            }
+            update() {
+                this.opacity += (this.targetOpacity - this.opacity) * this.speed;
+                if (Math.random() < 0.01) {
+                    this.targetOpacity = Math.random() * 0.7;
+                }
+            }
+            draw() {
+                if(this.opacity > 0.01) {
+                    ctx.fillStyle = `rgba(0, 123, 255, ${this.opacity})`;
+                    ctx.fillRect(this.x * pixelSize, this.y * pixelSize, pixelSize, pixelSize);
+                }
+            }
+        }
+
+        function initPixels() {
+            pixels = [];
+            cols = Math.floor(eposCanvas.width / pixelSize);
+            rows = Math.floor(eposCanvas.height / pixelSize);
+            for (let y = 0; y < rows; y++) {
+                pixels[y] = [];
+                for (let x = 0; x < cols; x++) {
+                    pixels[y][x] = new Pixel(x, y);
+                }
+            }
+        }
+
+        function animatePixels() {
+            ctx.clearRect(0, 0, eposCanvas.width, eposCanvas.height);
+            for (let y = 0; y < rows; y++) {
+                for (let x = 0; x < cols; x++) {
+                    pixels[y][x].update();
+                    pixels[y][x].draw();
+                }
+            }
+            requestAnimationFrame(animatePixels);
+        }
+
+        setCanvasSize();
+        initPixels();
+        animatePixels();
+        window.addEventListener('resize', () => {
+            setCanvasSize();
+            initPixels();
+        });
+    }
+
     // --- LÓGICA DAS ANIMAÇÕES DE SCROLL ---
     const animatedElements = document.querySelectorAll('.animate-on-scroll');
     if (animatedElements.length > 0) {
