@@ -31,7 +31,9 @@ document.addEventListener('DOMContentLoaded', () => {
             modalOverlay.classList.remove('active');
         }
 
-        closeModalBtn.addEventListener('click', closeModal);
+        if (closeModalBtn) {
+            closeModalBtn.addEventListener('click', closeModal);
+        }
         modalOverlay.addEventListener('click', (event) => {
             if (event.target === modalOverlay) {
                 closeModal();
@@ -264,15 +266,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- NOVO EFEITO 8: PULSOS ELÉTRICOS (PARA electrical-surveys.html) ---
+    // --- EFEITO 8: PULSOS ELÉTRICOS (PARA electrical-surveys.html) ---
     const electricalCanvas = document.getElementById('electrical-canvas');
     if(electricalCanvas) {
         const ctx = electricalCanvas.getContext('2d');
         const setCanvasSize = () => { electricalCanvas.width = electricalCanvas.offsetWidth; electricalCanvas.height = electricalCanvas.offsetHeight; };
-
         let nodes = [];
         const nodeCount = 20;
-
         class ElectricalNode {
             constructor() {
                 this.x = Math.random() * electricalCanvas.width;
@@ -294,27 +294,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 ctx.fill();
             }
         }
-
         function initElectricalNodes() {
             nodes = [];
             for(let i = 0; i < nodeCount; i++) {
                 nodes.push(new ElectricalNode());
             }
         }
-
         function animateElectrical() {
             ctx.clearRect(0, 0, electricalCanvas.width, electricalCanvas.height);
-
             nodes.forEach(node => {
                 node.update();
                 node.draw();
             });
-            
-            // Desenha arcos elétricos entre nós aleatórios
             for(let i = 0; i < 5; i++) {
                 const node1 = nodes[Math.floor(Math.random() * nodeCount)];
                 const node2 = nodes[Math.floor(Math.random() * nodeCount)];
-                
                 ctx.beginPath();
                 ctx.moveTo(node1.x, node1.y);
                 ctx.quadraticCurveTo(
@@ -325,10 +319,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 ctx.lineWidth = 1;
                 ctx.stroke();
             }
-
             requestAnimationFrame(animateElectrical);
         }
-
         setCanvasSize();
         initElectricalNodes();
         animateElectrical();
@@ -338,17 +330,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-
-    // --- NOVO EFEITO 9: PIXELS DIGITAIS (PARA epos.html) ---
+    // --- EFEITO 9: PIXELS DIGITAIS (PARA epos.html) ---
     const eposCanvas = document.getElementById('epos-canvas');
     if (eposCanvas) {
         const ctx = eposCanvas.getContext('2d');
         const setCanvasSize = () => { eposCanvas.width = eposCanvas.offsetWidth; eposCanvas.height = eposCanvas.offsetHeight; };
-
         let pixels = [];
         const pixelSize = 10;
         let cols, rows;
-
         class Pixel {
             constructor(x, y) {
                 this.x = x;
@@ -370,7 +359,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         }
-
         function initPixels() {
             pixels = [];
             cols = Math.floor(eposCanvas.width / pixelSize);
@@ -382,7 +370,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         }
-
         function animatePixels() {
             ctx.clearRect(0, 0, eposCanvas.width, eposCanvas.height);
             for (let y = 0; y < rows; y++) {
@@ -393,7 +380,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             requestAnimationFrame(animatePixels);
         }
-
         setCanvasSize();
         initPixels();
         animatePixels();
